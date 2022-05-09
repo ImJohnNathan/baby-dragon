@@ -43,8 +43,8 @@ const clientMessage = {
                             cardObj = CycledCard
                             message.channel.send(`
                             **Card Info**\n
-                            Name: ${cardObj.name} \n
-                            Picture: ${cardObj.iconUrls.medium}
+                            Name: ${cardObj.name}
+                            \rPicture: ${cardObj.iconUrls.medium}
                             `)
                             break
                         }
@@ -66,9 +66,17 @@ const clientMessage = {
         const args = message.content.slice(prefix.length)
         if(args.startsWith('player')) {
             let tag = args.slice(7)
-            ClashRoyaleAPI.getPlayerByTag(tag).then((player) => {
-                message.channel.send(player.name)
+            ClashRoyaleAPI.getPlayerByTag(tag)
+                    .then((player) => {
+                     message.channel.send(`>>> **Player Info** | Baby Dragon
+                     \r **Name**: ${player.name}
+                     \r **Arena**: ${player.arena.name) | ${player.arena.id}
+                     \r **Clan**: ${player.clan.name}
+                     \r **Win/Loss**: **W**: ${player.wins} | **L**: ${player.losses} | **W/L Ratio**: ${Math.round((player.wins / player.losses, 3))`)
             })
+            .catch((err) => {
+                console.log('Error: clientMessage.playerInfo')
+            }
         }
     }),
     ignition: function() {
