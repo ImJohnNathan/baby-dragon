@@ -24,7 +24,7 @@ const botInitialize = {
 }
 
 const clientMessage = {
-    commandHandler: client.on('message', message => {
+    cardInfo: client.on('message', message => {
         let prefix = botInitialize.prefix
         if(!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -55,12 +55,20 @@ const clientMessage = {
                 })
                 .catch((err) => {
                     // handle errors
-                    console.log('error')
+                    console.log('Error: clientMessage.cardInfo')
                 })
         }
+    }),
+    playerInfo: client.on('message', message =>{
+        let prefix = botInitialize.prefix
+        if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-        if(args.startsWith('embedtest')) {
-            let ]
+        const args = message.content.slice(prefix.length)
+        if(args.startsWith('player')) {
+            let tag = args.slice(7)
+            ClashRoyaleAPI.getPlayerByTag(tag).then((player) => {
+                message.channel.send(player.name)
+            })
         }
     }),
     ignition: function() {
@@ -70,25 +78,7 @@ const clientMessage = {
     }
 }
 
-const messageTable = {
-    const exampleEmbed: new MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle('Some title')
-        .setURL('https://discord.js.org/')
-        .setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-        .setDescription('Some description here')
-        .setThumbnail('https://i.imgur.com/AfFp7pu.png')
-        .addFields(
-            { name: 'Regular field title', value: 'Some value here' },
-            { name: '\u200B', value: '\u200B' },
-            { name: 'Inline field title', value: 'Some value here', inline: true },
-            { name: 'Inline field title', value: 'Some value here', inline: true },
-        )
-        .addField('Inline field title', 'Some value here', true)
-        .setImage('https://i.imgur.com/AfFp7pu.png')
-        .setTimestamp()
-        .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
-}
+
 
 //These are the keys. Do not write anything below this line.
 botInitialize.ignition();
