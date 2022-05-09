@@ -9,6 +9,7 @@
   "author": "John Nathan",
   "license": "ISC",
   "dependencies": {
+    "@varandas/clash-royale-api": "^1.1.9",
     "axios": "^0.27.2",
     "clash-royale-api": "^1.3.1",
     "discord.js": "^13.6.0"
