@@ -1,0 +1,3 @@
+function cum() {
+    return 'cum'
+}

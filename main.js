@@ -41,10 +41,7 @@ const clientMessage = {
                         let CycledCard = cards[i]
                         if(CycledCard.name.toLowerCase() === card) {
                             cardObj = CycledCard
-                            message.channel.send(`
-                            **Card Info**\n
-                            Name: ${cardObj.name} \n
-                            Picture: ${cardObj.iconUrls.medium}
+                            message.channel.send(`>>>  **Card Info**\rName: ${cardObj.name} \rPicture: ${cardObj.iconUrls.medium}
                             `)
                             break
                         }
@@ -65,19 +62,49 @@ const clientMessage = {
 
         const args = message.content.slice(prefix.length)
         if(args.startsWith('player')) {
-            let tag = args.slice(7)
+            let tag = args.slice(7).toUpperCase()
+            if(!tag.startsWith('#')) {
+                tag = `#${tag}`
+            }
             ClashRoyaleAPI.getPlayerByTag(tag).then((player) => {
-                message.channel.send(player.name)
+
+                message.channel.send('>>> **Player Stats | Baby Dragon**' + `
+                \rName: ${player.name}
+                \rClan: ${player.clan.name}
+                \rArena: ${player.arena.name}
+                \r ${player.arena.id}
+                \rWin/Loss Ratio: **W:** ${player.wins} | **L:** ${player.losses} | **W/L Ratio:** ${Math.round(player.wins/player.losses, 3)}`)
+            })
+            .catch((err) => {
+                message.channel.send(`Couldn't find a player by the name of ${tag}!`)
             })
         }
     }),
+    randomMetaDeck: client.on("message", message => {
+        if(!message.content.toLowerCase().startsWith('!bd randomdeck')) return
+
+        message.channel.send(randomizeDeck)
+
+        function randomizeDeck() {
+            let cards = ClashRoyaleAPI.getCards
+            return `this feature isnt programmed yet`
+        }
+    }),
+    kyleIsGay: client.on('message', message => {
+        if(message.author.username === 'Byle Karnes' && message.author.discriminator == '6338') {
+            message.channel.send(`your gay ${message.author}`)
+        }
+    }),
     ignition: function() {
-        for(i = 0; clientMessage.length - 1; i++){
+        for(i = 0; clientMessage.length - 2; i++){
             clientMessage[i]
         }
     }
 }
 
+const ClashData = {
+
+}
 
 
 //These are the keys. Do not write anything below this line.
