@@ -41,7 +41,10 @@ const clientMessage = {
                         let CycledCard = cards[i]
                         if(CycledCard.name.toLowerCase() === card) {
                             cardObj = CycledCard
-                            message.channel.send(`>>>  **Card Info**\rName: ${cardObj.name} \rPicture: ${cardObj.iconUrls.medium}
+                            message.channel.send(`
+                            **Card Info**\n
+                            Name: ${cardObj.name}
+                            \rPicture: ${cardObj.iconUrls.medium}
                             `)
                             break
                         }
@@ -78,6 +81,9 @@ const clientMessage = {
             .catch((err) => {
                 message.channel.send(`Couldn't find a player by the name of ${tag}!`)
             })
+            .catch((err) => {
+                console.log('Error: clientMessage.playerInfo')
+            }
         }
     }),
     randomMetaDeck: client.on("message", message => {
