@@ -96,9 +96,9 @@ const clientMessage = {
             return `this feature isnt programmed yet`
         }
     }),
-    kyleIsGay: client.on('message', message => {
+    kyleIsCool: client.on('message', message => {
         if(message.author.username === 'Byle Karnes' && message.author.discriminator == '6338') {
-            message.channel.send(`your gay ${message.author}`)
+            message.channel.send(`your cool ${message.author}`)
         }
     }),
     ignition: function() {
