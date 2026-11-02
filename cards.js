@@ -1,3 +1,0 @@
-function cum() {
-    return 'cum'
-}
